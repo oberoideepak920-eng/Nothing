@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Queen Shivani 👑❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #2c003e, #5a0f3b, #b8860b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+}
+
+.box {
+    background: rgba(255,255,255,0.96);
+    padding: 22px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    max-width: 360px;
+    z-index: 2;
+}
+
+img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    color: #7a1f3d;
+    font-size: 22px;
+}
+
+p {
+    font-size: 15px;
+    color: #333;
+}
+
+button {
+    padding: 12px 26px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 8px;
+    font-weight: bold;
+}
+
+#yes {
+    background: linear-gradient(135deg, #b8860b, #ffd700);
+    color: #3b1d05;
+}
+
+#no {
+    background: #ddd;
+    position: relative;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 22px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* Fireworks */
+.firework {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: gold;
+    border-radius: 50%;
+    animation: explode 1.5s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(0.3); opacity: 1; }
+    100% { transform: scale(4); opacity: 0; }
+}
+</style>
+</head>
+
+<body onclick="playMusic()">
+
+<div class="box" id="box">
+    <img src="shivani.jpg" alt="My Love">
+    <h1 id="question">Will you be my Valentine, Shivani? 👑❤️</h1>
+    <p>I love you meri dharamptni sahiba 💖</p>
+
+    <button id="yes" onclick="yesClicked()">Yes ❤️</button>
+    <button id="no" onmouseover="moveNo()">No 🙈</button>
+</div>
+
+<audio id="music" loop>
+    <source src="preet-re.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const messages = [
+    "Are you sure kreja 🥺❤️",
+    "Please think again meri jaan 😢💔",
+    "My heart will break bachcha 💕😭",
+    "I love you so much meri janeman 🥰❤️",
+    "You’re my forever my love 💍💖",
+    "Plz say yes meri dharamptni sahiba 👑🙏"
+];
+
+let count = 0;
+let musicPlayed = false;
+
+function playMusic() {
+    if (!musicPlayed) {
+        document.getElementById("music").play();
+        musicPlayed = true;
+    }
+}
+
+function moveNo() {
+    const noBtn = document.getElementById("no");
+    const x = Math.random() * 220 - 110;
+    const y = Math.random() * 220 - 110;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    document.getElementById("question").innerText =
+        messages[count % messages.length];
+    count++;
+}
+
+function yesClicked() {
+    document.getElementById("box").innerHTML = `
+        <h1>Yaaay!!! 👑❤️🥹</h1>
+        <p>
+            Shivani ❤️<br><br>
+            I love you meri dharamptni sahiba 💖<br>
+            I will love you forever and ever and ever meri janemann 🥰<br><br>
+            I love you infinite<br>
+            and will love you to the infinity ♾️❤️<br><br>
+            <b>Mera raja babu 👑💋</b><br><br>
+            <i>Forever yours 💍❤️</i>
+        </p>
+    `;
+
+    for (let i = 0; i < 30; i++) {
+        const fw = document.createElement("div");
+        fw.className = "firework";
+        fw.style.left = Math.random() * window.innerWidth + "px";
+        fw.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1500);
+    }
+}
+
+/* Floating hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 18 + 16 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 450);
+</script>
+
+</body>
+</html>
